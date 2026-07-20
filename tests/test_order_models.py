@@ -27,6 +27,14 @@ class TestRequestedModifier:
         with pytest.raises(ValidationError):
             RequestedModifier(action="remove")
 
+    def test_name_lowercased(self):
+        mod = RequestedModifier(action="remove", name="Onions")
+        assert mod.name == "onions"
+
+    def test_name_stripped(self):
+        mod = RequestedModifier(action="add", name="  cheese  ")
+        assert mod.name == "cheese"
+
 
 class TestRequestedItem:
     def test_defaults(self):
@@ -51,6 +59,30 @@ class TestRequestedItem:
     def test_missing_name_rejected(self):
         with pytest.raises(ValidationError):
             RequestedItem(quantity=1)
+
+    def test_name_lowercased(self):
+        item = RequestedItem(name="Chicken Sandwich")
+        assert item.name == "chicken sandwich"
+
+    def test_name_stripped(self):
+        item = RequestedItem(name="  fries  ")
+        assert item.name == "fries"
+
+    def test_whitespace_only_name_rejected(self):
+        with pytest.raises(ValidationError):
+            RequestedItem(name="   ")
+
+    def test_empty_name_rejected(self):
+        with pytest.raises(ValidationError):
+            RequestedItem(name="", quantity=1)
+
+    def test_zero_quantity_rejected(self):
+        with pytest.raises(ValidationError):
+            RequestedItem(name="fries", quantity=0)
+
+    def test_negative_quantity_rejected(self):
+        with pytest.raises(ValidationError):
+            RequestedItem(name="fries", quantity=-1)
 
     def test_modifiers_are_independent_per_instance(self):
         item1 = RequestedItem(name="burger")
