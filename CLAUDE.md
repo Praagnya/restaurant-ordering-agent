@@ -2,8 +2,13 @@
 
 ## Project goal
 
-Build a production-style restaurant ordering agent that converts natural-language
-customer requests into validated orders.
+Build a production-style agentic AI system that takes natural-language restaurant
+orders and carries them through to completion — menu lookup, cart creation, upsell,
+confirmation, payment, and POS submission.
+
+This project demonstrates the full stack of skills required for a Junior AI Engineer
+role: agentic systems with tool use, deterministic ML-backed services, LLM API
+integration, structured outputs, Pydantic validation, and a path to deployment.
 
 Example:
 
@@ -38,25 +43,36 @@ Do not implement the entire application at once.
 The first milestone is:
 
 Customer text
-→ structured order
+→ ParsedOrder (structured extraction via LLM with tool use)
 → Pydantic validation
+→ ResolvedOrder (menu lookup via deterministic services)
 
-Do not add LangGraph, voice, payment, POS integration, databases, or APIs until
+Do not add voice, payment, POS integration, databases, or deployment until
 explicitly requested.
 
 ## Architecture principles
 
-- Use the LLM only for natural-language understanding and response generation.
+- The agent uses Claude with tool use to orchestrate the ordering flow.
+- Services (menu search, cart, pricing, payment) are exposed as tools the agent calls.
 - Use deterministic Python code for menu validation, pricing, carts, payment,
-  and POS operations.
+  and POS operations — never let the LLM compute these.
 - Validate all LLM output with Pydantic.
 - Never allow the LLM to invent prices, menu item IDs, modifier IDs, availability,
   or payment results.
-- Keep business logic separate from orchestration.
-- LangGraph will eventually orchestrate tested service functions.
+- Keep business logic in services, separate from agent orchestration.
+- LangGraph will orchestrate multi-step flows once single-agent tool use is working.
 - Represent money as integer cents, not floating-point dollars.
 - Require explicit customer confirmation before payment.
 - Payment and POS operations must support idempotency.
+
+## Milestones
+
+1. **Text → structured order** (current): LLM extracts a ParsedOrder, services resolve it against the menu.
+2. **Tool-calling agent**: Wrap services as Claude tools; agent drives the full ordering conversation.
+3. **LangGraph orchestration**: Replace single-agent loop with a stateful LangGraph graph.
+4. **Deployment**: Containerize and expose via FastAPI; deploy to a cloud provider.
+5. **Observability**: Add eval and tracing (Langfuse or LangSmith).
+6. **Voice**: Add speech-to-text input layer.
 
 ## Development workflow
 
@@ -100,9 +116,10 @@ Before creating or editing multiple files, explain the proposed changes.
 
 ```text
 app/
-├── models/
-├── services/
-├── agent/
-└── repositories/
+├── models/        # Pydantic models
+├── services/      # Deterministic business logic (exposed as agent tools)
+├── agent/         # LLM agent, tool definitions, prompt templates
+└── repositories/  # Data access (menu, orders)
 
 tests/
+```

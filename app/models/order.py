@@ -25,4 +25,4 @@ class RequestedItem(BaseModel):
 
 
 class ParsedOrder(BaseModel):
-    items: list[RequestedItem]
+    items: list[RequestedItem] = Field(default_factory=list)

@@ -92,27 +92,32 @@ class TestRequestedItem:
 
 
 class TestParsedOrder:
-    def test_same_item_with_and_without_modifier_plus_side(self):
-        # "two chicken sandwiches, one without onions, and add fries"
-        order = ParsedOrder(
-            items=[
-                RequestedItem(name="chicken sandwich", quantity=1),
-                RequestedItem(
-                    name="chicken sandwich",
-                    quantity=1,
-                    modifiers=[RequestedModifier(action="remove", name="onions")],
-                ),
-                RequestedItem(name="fries", quantity=1),
-            ]
-        )
-        assert len(order.items) == 3
-        assert order.items[1].modifiers[0].action == "remove"
-        assert order.items[1].modifiers[0].name == "onions"
+    def test_empty_items_is_valid(self):
+        order = ParsedOrder()
+        assert order.items == []
 
-    def test_empty_items(self):
+    def test_explicit_empty_items(self):
         order = ParsedOrder(items=[])
         assert order.items == []
 
-    def test_missing_items_rejected(self):
-        with pytest.raises(ValidationError):
-            ParsedOrder()
+    def test_single_item(self):
+        order = ParsedOrder(items=[RequestedItem(name="fries")])
+        assert len(order.items) == 1
+        assert order.items[0].name == "fries"
+
+    def test_multiple_items(self):
+        order = ParsedOrder(items=[
+            RequestedItem(name="big mac"),
+            RequestedItem(name="medium fries", quantity=2),
+        ])
+        assert len(order.items) == 2
+
+    def test_item_normalisation_applied(self):
+        order = ParsedOrder(items=[RequestedItem(name="  Big Mac  ")])
+        assert order.items[0].name == "big mac"
+
+    def test_items_are_independent_per_instance(self):
+        order1 = ParsedOrder()
+        order2 = ParsedOrder()
+        order1.items.append(RequestedItem(name="fries"))
+        assert order2.items == []
