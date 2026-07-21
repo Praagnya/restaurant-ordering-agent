@@ -47,6 +47,7 @@ class TestSearchMenu:
         assert result is not None
         assert result.id == "fries"
 
-    def test_partial_match_not_returned(self, menu):
+    def test_fuzzy_match_returned(self, menu):
         result = search_menu("chicken", menu)
-        assert result is None
+        assert result is not None
+        assert result.id == "chicken-sandwich"

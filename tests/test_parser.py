@@ -50,7 +50,7 @@ class TestParseOrder:
     def test_correct_model_used(self):
         client = _mock_client(ParsedOrder(items=[]))
         parse_order("a burger", client)
-        assert client.messages.create.call_args.kwargs["model"] == "claude-opus-4-8"
+        assert client.messages.create.call_args.kwargs["model"] == "claude-sonnet-4-5"
 
     def test_raises_on_invalid_json(self):
         client = MagicMock(spec=Anthropic)

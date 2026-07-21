@@ -1,8 +1,11 @@
+from langsmith import traceable
+
 from app.models.cart import Cart
 from app.models.menu import MenuItem
 from app.models.order import RequestedModifier
 from app.models.resolved import ResolvedOrderItem
-from app.services.cart_service import add_to_cart
+from app.repositories.orders import save_order
+from app.services.cart_service import add_to_cart, remove_from_cart
 from app.services.menu_service import search_menu
 
 TOOLS = [
@@ -60,6 +63,20 @@ TOOLS = [
         },
     },
     {
+        "name": "remove_from_cart",
+        "description": "Remove an item from the cart by its menu item ID.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "item_id": {
+                    "type": "string",
+                    "description": "The menu item ID to remove from the cart",
+                }
+            },
+            "required": ["item_id"],
+        },
+    },
+    {
         "name": "confirm_order",
         "description": "Call this when the customer confirms they are happy with their order.",
         "input_schema": {
@@ -78,6 +95,7 @@ TOOLS = [
 ]
 
 
+@traceable(name="dispatch_tool")
 def dispatch(
     tool_name: str,
     tool_input: dict,
@@ -118,8 +136,18 @@ def dispatch(
         lines = [f"{item.quantity}x {item.menu_item.name}" for item in cart.items]
         return f"Cart: {', '.join(lines)}. Total: ${cart.total_cents / 100:.2f}.", cart
 
+    if tool_name == "remove_from_cart":
+        item_id = tool_input["item_id"]
+        cart, found = remove_from_cart(cart, item_id)
+        if not found:
+            return f"No item with ID '{item_id}' found in the cart.", cart
+        return f"Removed {item_id} from cart.", cart
+
     if tool_name == "confirm_order":
-        return "Order confirmed.", cart
+        if not cart.items:
+            return "Cannot confirm an empty cart.", cart
+        order_id = save_order(cart)
+        return f"Order confirmed! Order number: #{order_id}. Total: ${cart.total_cents / 100:.2f}.", cart
 
     if tool_name == "get_full_menu":
         lines = [
