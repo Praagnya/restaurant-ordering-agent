@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from app.models.menu import MenuItem
 
 MENU: list[MenuItem] = [
@@ -124,3 +127,9 @@ MENU: list[MenuItem] = [
 def get_menu() -> list[MenuItem]:
     """Return the full in-memory menu."""
     return MENU
+
+
+def get_menu_from_file(path: str = "data/menu.json") -> list[MenuItem]:
+    """Load menu from a JSON file produced by scripts/parse_menu.py."""
+    data = json.loads(Path(path).read_text())
+    return [MenuItem(**item) for item in data]

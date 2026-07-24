@@ -1,16 +1,19 @@
 [project]
 name = "voice-ai-restaurant"
 version = "0.1.0"
-description = "Add your description here"
+description = "order-from-restaurant"
 readme = "README.md"
 requires-python = ">=3.12.1"
 dependencies = [
     "anthropic>=0.117.0",
+    "fastapi>=0.115.0",
     "langsmith>=0.10.9",
     "pipecat-ai[deepgram,local,silero]>=1.5.0",
     "pydantic>=2.13.4",
     "pytest>=9.1.1",
     "python-dotenv>=1.2.2",
+    "python-multipart>=0.0.20",
+    "uvicorn>=0.34.0",
 ]
 
 [tool.pytest.ini_options]

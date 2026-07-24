@@ -176,5 +176,29 @@
       }
     ],
     "total_cents": 348
+  },
+  {
+    "id": 11,
+    "timestamp": "2026-07-22T06:42:35.626833+00:00",
+    "items": [
+      {
+        "name": "Cheeseburger",
+        "quantity": 1,
+        "modifiers": [
+          {
+            "action": "add",
+            "name": "onions"
+          }
+        ],
+        "line_total_cents": 199
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 348
   }
 ]
