@@ -22,7 +22,7 @@ An AI-powered restaurant ordering system that lets customers place orders via te
 | API framework | FastAPI |
 | Data validation | Pydantic v2 |
 | Tracing | LangSmith |
-| Deployment | Docker + Fly.io |
+| Deployment | Docker |
 
 ## Project Structure
 
@@ -94,13 +94,10 @@ uvicorn app.api.app:app --port 8080
 
 ## Deployment
 
-The app is configured for [Fly.io](https://fly.io):
-
 ```bash
-fly deploy
+docker build -t voice-ai-restaurant .
+docker run -p 8080:8080 --env-file .env voice-ai-restaurant
 ```
-
-Configuration is in `fly.toml` (region: `iad`, 512 MB RAM, auto-scales to 0).
 
 ## Running Tests
 
