@@ -1,0 +1,204 @@
+[
+  {
+    "id": "9e2ac111-643d-491a-83c3-60239e17df7e",
+    "timestamp": "2026-07-21T18:15:37.485989+00:00",
+    "items": [
+      {
+        "name": "Big Mac",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 599
+      }
+    ],
+    "total_cents": 599
+  },
+  {
+    "id": 2,
+    "timestamp": "2026-07-21T18:23:55.571921+00:00",
+    "items": [
+      {
+        "name": "McNuggets 10 Piece",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 549
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 698
+  },
+  {
+    "id": 3,
+    "timestamp": "2026-07-21T18:35:47.530703+00:00",
+    "items": [
+      {
+        "name": "McDouble",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 299
+      }
+    ],
+    "total_cents": 299
+  },
+  {
+    "id": 4,
+    "timestamp": "2026-07-21T19:28:07.512954+00:00",
+    "items": [
+      {
+        "name": "Apple Pie",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 149
+  },
+  {
+    "id": 5,
+    "timestamp": "2026-07-21T20:16:55.922594+00:00",
+    "items": [
+      {
+        "name": "Cheeseburger",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 199
+      },
+      {
+        "name": "Medium Sprite",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 348
+  },
+  {
+    "id": 6,
+    "timestamp": "2026-07-21T20:20:46.903918+00:00",
+    "items": [
+      {
+        "name": "Crispy Chicken Sandwich",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 549
+      },
+      {
+        "name": "Apple Pie",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 698
+  },
+  {
+    "id": 7,
+    "timestamp": "2026-07-21T20:32:38.221959+00:00",
+    "items": [
+      {
+        "name": "Apple Slices",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 99
+      },
+      {
+        "name": "Water",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 99
+      },
+      {
+        "name": "McChicken",
+        "quantity": 3,
+        "modifiers": [],
+        "line_total_cents": 597
+      }
+    ],
+    "total_cents": 795
+  },
+  {
+    "id": 8,
+    "timestamp": "2026-07-21T22:16:18.407804+00:00",
+    "items": [
+      {
+        "name": "Crispy Chicken Sandwich",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 549
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 698
+  },
+  {
+    "id": 9,
+    "timestamp": "2026-07-21T23:04:39.550277+00:00",
+    "items": [
+      {
+        "name": "Oreo McFlurry",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 399
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 548
+  },
+  {
+    "id": 10,
+    "timestamp": "2026-07-22T06:00:33.606264+00:00",
+    "items": [
+      {
+        "name": "Cheeseburger",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 199
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 348
+  },
+  {
+    "id": 11,
+    "timestamp": "2026-07-22T06:42:35.626833+00:00",
+    "items": [
+      {
+        "name": "Cheeseburger",
+        "quantity": 1,
+        "modifiers": [
+          {
+            "action": "add",
+            "name": "onions"
+          }
+        ],
+        "line_total_cents": 199
+      },
+      {
+        "name": "Medium Coke",
+        "quantity": 1,
+        "modifiers": [],
+        "line_total_cents": 149
+      }
+    ],
+    "total_cents": 348
+  }
+]
