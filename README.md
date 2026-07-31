@@ -1,6 +1,6 @@
 # Voice AI Restaurant
 
-An AI-powered restaurant ordering system that lets customers place orders via text, voice, or REST API. Powered by Claude for natural conversation and Deepgram for real-time speech processing.
+An AI-powered restaurant ordering system that lets customers place orders via text, voice, or REST API. Claude for natural conversation and Deepgram for real-time speech processing.
 
 ## Features
 
