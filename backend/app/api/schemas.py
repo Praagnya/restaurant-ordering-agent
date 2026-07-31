@@ -16,5 +16,6 @@ class ChatResponse(BaseModel):
 
 
 class MenuParseResponse(BaseModel):
+    restaurant_name: str
     section_count: int
     items: list[MenuItem]

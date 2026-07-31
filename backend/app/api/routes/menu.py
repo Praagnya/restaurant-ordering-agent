@@ -1,6 +1,6 @@
 import tempfile
 
-from fastapi import APIRouter, HTTPException, UploadFile
+from fastapi import APIRouter, Form, HTTPException, UploadFile
 
 from app.api.dependencies import client, menu
 from app.api.schemas import MenuParseResponse
@@ -25,7 +25,10 @@ async def get_menu_items() -> list[MenuItem]:
 
 
 @router.post("/menu/parse", response_model=MenuParseResponse)
-async def parse_menu(file: UploadFile) -> MenuParseResponse:
+async def parse_menu(
+    file: UploadFile,
+    restaurant_name: str | None = Form(None),
+) -> MenuParseResponse:
     if file.content_type not in SUPPORTED_CONTENT_TYPES:
         raise HTTPException(
             status_code=400,
@@ -46,7 +49,14 @@ async def parse_menu(file: UploadFile) -> MenuParseResponse:
 
     items = convert_to_menu_items(intermediate)
 
+    resolved_name = (
+        restaurant_name
+        or intermediate.get("restaurant_name")
+        or "Unnamed Restaurant"
+    )
+
     return MenuParseResponse(
+        restaurant_name=resolved_name,
         section_count=len(intermediate.get("sections", [])),
         items=items,
     )
